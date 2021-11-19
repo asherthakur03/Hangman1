@@ -48,7 +48,9 @@ HANGMAN_PICS = ['''
 words = {'Colors':'red orange yellow green blue indigo violet white black brown'.split(),
 'Shapes':'square triangle rectangle circle ellipse rhombus trapazoid chevron pentagon hexagon septagon octogon'.split(),
 'Fruits':'apple orange lemon lime pear watermelon grape grapefruit cherry banana cantalope mango strawberry tomato'.split(),
-'Animals':'bat bear beaver cat cougar crab deer dog donkey duck eagle fish frog goat leech lion lizard monkey moose mouse otter owl panda python rabbit rat shark sheep skunk squid tiger turkey turtle weasel whale wolf wombat zebra'.split()}
+'Animals':'bat bear beaver cat cougar crab deer dog donkey duck eagle fish frog goat leech lion lizard monkey moose mouse otter owl panda python rabbit rat shark sheep skunk squid tiger turkey turtle weasel whale wolf wombat zebra'.split(),
+'Sports': 'baseball basketball soccer football lacrosse tennis golf running volleyball badminton swimming boxing skiing cricket rugby pool darts bowling hockey surfing cycling archery fishing gymnastics'.split(),
+'First Twenty Elements': 'hydrogen helium lithium beryllium boron carbon nitrogen oxygen fluorine neon sodium magnesium aluminium silicon phospohorus sulfur chlorine argon potassium calcium'.split()}
 
 def getRandomWord(wordDict):
     # This function returns a random string from the passed dictionary of lists of strings, and the key also.
@@ -86,7 +88,7 @@ def getGuess(alreadyGuessed):
         guess = input()
         guess = guess.lower()
         if len(guess) != 1:
-            print('Please enter a single letter.')
+            print('Only guess one letter.')
         elif guess in alreadyGuessed:
             print('You have already guessed that letter. Choose again.')
         elif guess not in 'abcdefghijklmnopqrstuvwxyz':
@@ -137,7 +139,7 @@ while True:
                 foundAllLetters = False
                 break
         if foundAllLetters:
-            print('Yes! The secret word is "' + secretWord + '"! You have won!')
+            print('CONGRATS! YOU HAVE GUESSED THE CORRECT WORD: "' + secretWord +'')
             gameIsDone = True
     else:
         missedLetters = missedLetters + guess
