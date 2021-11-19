@@ -160,3 +160,4 @@ while True:
         else:
             break
 ##asher is very cute
+#I added the sports and first tewenty elements categories and changed some of the outputs - Noah
