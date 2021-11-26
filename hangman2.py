@@ -1,47 +1,56 @@
 import random
 HANGMAN_PICS = ['''
   +---+
+  |   |  
       |
       |
       |
      ===''', '''
   +---+
+  |   |
   O   |
       |
       |
      ===''', '''
   +---+
+  |   |
   O   |
   |   |
       |
      ===''', '''
   +---+
+  |   |
   O   |
  /|   |
       |
      ===''', '''
   +---+
+  |   | 
   O   |
  /|\  |
       |
      ===''', '''
   +---+
+  |   | 
   O   |
  /|\  |
  /    |
      ===''', '''
   +---+
+  |   |
   O   |
  /|\  |
  / \  |
      ===''', '''
   +---+
- [O   |
+  |   | 
+ (O   |
  /|\  |
  / \  |
      ===''', '''
   +---+
- [O]  |
+  |   |
+ (O)  |
  /|\  |
  / \  |
      ===''']
@@ -87,8 +96,15 @@ def getGuess(alreadyGuessed):
         print('Guess a letter.')
         guess = input()
         guess = guess.lower()
-        if len(guess) != 1:
-            print('Only guess one letter.')
+        if guess == secretWord:
+            print('You have guessed the correct word!!!')
+            if playAgain():
+                missedLetters = ''
+                correctLetters = ''
+                gameIsDone = False
+
+            else:
+                break
         elif guess in alreadyGuessed:
             print('You have already guessed that letter. Choose again.')
         elif guess not in 'abcdefghijklmnopqrstuvwxyz':
@@ -105,8 +121,8 @@ def playAgain():
 print('H A N G M A N')
 
 difficulty = 'X'
-while difficulty not in 'EMH':
-  print('Enter difficulty: E - Easy, M - Medium, H - Hard')
+while difficulty not in 'EMHP':
+  print('Enter difficulty: E - Easy, M - Medium, H - Hard, P - Pendar ')
   difficulty = input().upper()
 if difficulty == 'M':
     del HANGMAN_PICS[8]
@@ -116,6 +132,15 @@ if difficulty == 'H':
     del HANGMAN_PICS[7]
     del HANGMAN_PICS[5]
     del HANGMAN_PICS[3]
+if difficulty == 'P':
+    #you have one life, if you guess an incorrect letter, you lose.
+    del HANGMAN_PICS[7]
+    del HANGMAN_PICS[6]
+    del HANGMAN_PICS[5]
+    del HANGMAN_PICS[4]
+    del HANGMAN_PICS[3]
+    del HANGMAN_PICS[2]
+    del HANGMAN_PICS[1]
 
 missedLetters = ''
 correctLetters = ''
