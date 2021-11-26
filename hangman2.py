@@ -96,15 +96,15 @@ def getGuess(alreadyGuessed):
         print('Guess a letter.')
         guess = input()
         guess = guess.lower()
-        if guess == secretWord:
+        if guess == secretWord: #this allows the player to guess the word in its entirity and not just letter by letter - Noah
             print('You have guessed the correct word!!!')
             if playAgain():
-                missedLetters = ''
+                missedLetters = ''    
                 correctLetters = ''
-                gameIsDone = False
+                gameIsDone = False  #this will loop this the code if the player wishes to play again - Noah
 
             else:
-                break
+                break #if the user does not want to play again, this stops the code - Noah
         elif guess in alreadyGuessed:
             print('You have already guessed that letter. Choose again.')
         elif guess not in 'abcdefghijklmnopqrstuvwxyz':
