@@ -60,7 +60,8 @@ words = {'Colors':'red orange yellow green blue indigo violet white black brown'
 'Animals':'bat bear beaver cat cougar crab deer dog donkey duck eagle fish frog goat leech lion lizard monkey moose mouse otter owl panda python rabbit rat shark sheep skunk squid tiger turkey turtle weasel whale wolf wombat zebra'.split(),
 'Sports': 'baseball basketball soccer football lacrosse tennis golf running volleyball badminton swimming boxing skiing cricket rugby pool darts bowling hockey surfing cycling archery fishing gymnastics'.split(),
 'First Twenty Elements': 'hydrogen helium lithium beryllium boron carbon nitrogen oxygen fluorine neon sodium magnesium aluminium silicon phospohorus sulfur chlorine argon potassium calcium'.split()}
-
+#Created an empty score variable so that we can use it to keep track of the code later on in the code - Gavin
+score = 0
 def getRandomWord(wordDict):
     # This function returns a random string from the passed dictionary of lists of strings, and the key also.
     # First, randomly select a key from the dictionary:
@@ -71,10 +72,11 @@ def getRandomWord(wordDict):
 
     return [wordDict[wordKey][wordIndex], wordKey]
 
-def displayBoard(missedLetters, correctLetters, secretWord):
+def displayBoard(missedLetters, correctLetters, secretWord, score):
     print(HANGMAN_PICS[len(missedLetters)])
     print()
-
+#Added the score count to the display board - Gavin
+    print('Score:' + str(score))
     print('Missed letters:', end=' ')
     for letter in missedLetters:
         print(letter, end=' ')
@@ -149,7 +151,7 @@ gameIsDone = False
 
 while True:
     print('The secret word is in the set: ' + secretSet)
-    displayBoard(missedLetters, correctLetters, secretWord)
+    displayBoard(missedLetters, correctLetters, secretWord, score)
 
     # Let the player type in a letter.
     guess = getGuess(missedLetters + correctLetters)
@@ -164,14 +166,27 @@ while True:
                 foundAllLetters = False
                 break
         if foundAllLetters:
-            print('CONGRATS! YOU HAVE GUESSED THE CORRECT WORD: "' + secretWord +'')
+            print('CONGRATS! YOU HAVE GUESSED THE CORRECT WORD: ' + secretWord +'')
+
+            #Increases the score by a different amount based on the difficulty of the game - Gavin
+            if difficulty == 'E':
+                score += 1
+            elif difficulty == 'M':
+                score += 3
+            elif difficulty == 'H':
+                score += 5
+            elif difficulty == 'P':
+                score += 10
+            #Prints the current score of the player after the game - Gavin
+            print('Your current score is:' + ' ' + str(score) + '')
             gameIsDone = True
     else:
         missedLetters = missedLetters + guess
 
         # Check if player has guessed too many times and lost.
+        #Score does not update if the player loses - Gavin
         if len(missedLetters) == len(HANGMAN_PICS) - 1:
-            displayBoard(missedLetters, correctLetters, secretWord)
+            displayBoard(missedLetters, correctLetters, secretWord, score)
             print('You have run out of guesses!\nAfter ' + str(len(missedLetters)) + ' missed guesses and ' + str(len(correctLetters)) + ' correct guesses, the word was "' + secretWord + '"')
             gameIsDone = True
 
