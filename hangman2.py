@@ -221,6 +221,9 @@ while True:
             missedLetters = ''
             correctLetters = ''
             gameIsDone = False
+            #Allows the player to pick a new difficulty after every game - Gavin
+            print('Enter difficulty: E - Easy, M - Medium, H - Hard, P - Pendar ')
+            difficulty = input().upper()
             secretWord, secretSet = getRandomWord(words)
         else:
             break
