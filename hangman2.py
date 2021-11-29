@@ -112,6 +112,8 @@ def getGuess(alreadyGuessed):
 
         if guess in alreadyGuessed:
             print('You have already guessed that letter. Choose again.')
+        elif len(guess) > 1 and guess != secretWord:
+            print("That guess is incorrect. Guess again.")
         elif guess not in 'abcdefghijklmnopqrstuvwxyz':
             print('Please enter a LETTER.')
         else:
@@ -160,6 +162,17 @@ while True:
 
     if guess == secretWord:  # this allows the player to guess the word in its entirity and not just letter by letter - Noah
         print('You have guessed the correct word!!!')
+        # Increases the score by a different amount based on the difficulty of the game - Gavin
+        if difficulty == 'E':
+            score += 1
+        elif difficulty == 'M':
+            score += 3
+        elif difficulty == 'H':
+            score += 5
+        elif difficulty == 'P':
+            score += 10
+        # Prints the current score of the player after the game - Gavin
+        print('Your current score is:' + ' ' + str(score) + '')
         gameIsDone = True
 
     elif guess in secretWord:
@@ -194,6 +207,8 @@ while True:
         if len(missedLetters) == len(HANGMAN_PICS) - 1:
             displayBoard(missedLetters, correctLetters, secretWord, score)
             print('You have run out of guesses!\nAfter ' + str(len(missedLetters)) + ' missed guesses and ' + str(len(correctLetters)) + ' correct guesses, the word was "' + secretWord + '"')
+            # Prints the current score of the player after the game - Gavin
+            print('Your current score is:' + ' ' + str(score) + '')
             gameIsDone = True
 
     # Ask the player if they want to play again (but only if the game is done).
