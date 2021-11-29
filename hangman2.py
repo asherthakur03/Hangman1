@@ -113,7 +113,7 @@ def getGuess(alreadyGuessed):
         if guess in alreadyGuessed:
             print('You have already guessed that letter. Choose again.')
         elif len(guess) > 1 and guess != secretWord:
-            print("That guess is incorrect. Guess again.")
+            return guess
         elif guess not in 'abcdefghijklmnopqrstuvwxyz':
             print('Please enter a LETTER.')
         else:
@@ -185,7 +185,7 @@ while True:
                 foundAllLetters = False
                 break
         if foundAllLetters:
-            print('CONGRATS! YOU HAVE GUESSED THE CORRECT WORD: ' + secretWord +'')
+            print('CONGRATS! YOU ARE COOL AND YOU HAVE GUESSED THE CORRECT WORD: ' + secretWord +'')
 
             #Increases the score by a different amount based on the difficulty of the game - Gavin
             if difficulty == 'E':
@@ -199,6 +199,10 @@ while True:
             #Prints the current score of the player after the game - Gavin
             print('Your current score is:' + ' ' + str(score) + '')
             gameIsDone = True
+    #Adds a ligament to the missedLetters column for a wrong guess of an entire word - Gavin
+    elif len(guess) > 1 and guess != secretWord:
+        print("That guess is incorrect. Guess again.")
+        missedLetters = missedLetters + " "
     else:
         missedLetters = missedLetters + guess
 
