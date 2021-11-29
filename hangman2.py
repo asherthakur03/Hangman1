@@ -106,16 +106,11 @@ def getGuess(alreadyGuessed):
         print('Guess a letter.')
         guess = input()
         guess = guess.lower()
-        if guess == secretWord: #this allows the player to guess the word in its entirity and not just letter by letter - Noah
-            print('You have guessed the correct word!!!')
-            if playAgain():
-                missedLetters = ''    
-                correctLetters = ''
-                gameIsDone = False  #this will loop this the code if the player wishes to play again - Noah
 
-            else:
-                break #if the user does not want to play again, this stops the code - Noah
-        elif guess in alreadyGuessed:
+        if guess == secretWord:
+            return guess
+
+        if guess in alreadyGuessed:
             print('You have already guessed that letter. Choose again.')
         elif guess not in 'abcdefghijklmnopqrstuvwxyz':
             print('Please enter a LETTER.')
@@ -126,7 +121,6 @@ def playAgain():
     # This function returns True if the player wants to play again, otherwise it returns False.
     print('Do you want to play again? (yes or no)')
     return input().lower().startswith('y')
-
 
 print('H A N G M A N')
 
@@ -163,6 +157,17 @@ while True:
 
     # Let the player type in a letter.
     guess = getGuess(missedLetters + correctLetters)
+
+    if guess == secretWord:  # this allows the player to guess the word in its entirity and not just letter by letter - Noah
+        print('You have guessed the correct word!!!')
+        if playAgain():
+            missedLetters = ''
+            correctLetters = ''
+            gameIsDone = False
+            secretWord, secretSet = getRandomWord(words)
+        else:
+            break  # if the user does not want to play again, this stops the code - Noah
+
 
     if guess in secretWord:
         correctLetters = correctLetters + guess
