@@ -62,6 +62,7 @@ words = {'Colors':'red orange yellow green blue indigo violet white black brown'
 'First Twenty Elements': 'hydrogen helium lithium beryllium boron carbon nitrogen oxygen fluorine neon sodium magnesium aluminium silicon phospohorus sulfur chlorine argon potassium calcium'.split()}
 #Created an empty score variable so that we can use it to keep track of the code later on in the code - Gavin
 score = 0
+
 def getRandomWord(wordDict):
     # This function returns a random string from the passed dictionary of lists of strings, and the key also.
     # First, randomly select a key from the dictionary:
@@ -71,6 +72,13 @@ def getRandomWord(wordDict):
     wordIndex = random.randint(0, len(wordDict[wordKey]) - 1)
 
     return [wordDict[wordKey][wordIndex], wordKey]
+
+
+missedLetters = ''
+correctLetters = ''
+secretWord, secretSet = getRandomWord(words)
+gameIsDone = False
+
 
 def displayBoard(missedLetters, correctLetters, secretWord, score):
     print(HANGMAN_PICS[len(missedLetters)])
