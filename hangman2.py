@@ -160,16 +160,9 @@ while True:
 
     if guess == secretWord:  # this allows the player to guess the word in its entirity and not just letter by letter - Noah
         print('You have guessed the correct word!!!')
-        if playAgain():
-            missedLetters = ''
-            correctLetters = ''
-            gameIsDone = False
-            secretWord, secretSet = getRandomWord(words)
-        else:
-            break  # if the user does not want to play again, this stops the code - Noah
+        gameIsDone = True
 
-
-    if guess in secretWord:
+    elif guess in secretWord:
         correctLetters = correctLetters + guess
 
         # Check if the player has won
