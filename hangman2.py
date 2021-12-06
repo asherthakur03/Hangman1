@@ -88,6 +88,11 @@ def displayBoard(missedLetters, correctLetters, secretWord, score):
     print('Missed letters:', end=' ')
     for letter in missedLetters:
         print(letter, end=' ')
+    ##This is the Guessed letter counter -Asher
+    a = len(missedLetters)+len(correctLetters)
+    b = len(HANGMAN_PICS)
+    c = b-a
+    print("You've taken " + str(a) + " guesses and you have " + str(c) + " left.")
     print()
 
     blanks = '_' * len(secretWord)
