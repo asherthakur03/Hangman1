@@ -1,4 +1,5 @@
 import random
+##This is the displayed "Hangman" given as a series of strings that evolve as the game goes on. The usage of these pictures varies based on the difficulty chosen and the number of  wrong guesses taken.
 HANGMAN_PICS = ['''
   +---+
   |   |  
@@ -54,6 +55,7 @@ HANGMAN_PICS = ['''
  /|\  |
  / \  |
      ===''']
+##This is the list of possible words to be chosen at random when the game starts. They're sorted by category which is shown to the player when the game begins. 
 words = {'Colors':'red orange yellow green blue indigo violet white black brown'.split(),
 'Shapes':'square triangle rectangle circle ellipse rhombus trapezoid chevron pentagon hexagon septagon octagon'.split(),
 'Fruits':'apple orange lemon lime pear watermelon grape grapefruit cherry banana cantalope mango strawberry tomato'.split(),
@@ -63,6 +65,7 @@ words = {'Colors':'red orange yellow green blue indigo violet white black brown'
 #Created an empty score variable so that we can use it to keep track of the code later on in the code - Gavin
 score = 0
 
+##This is the function to retrieve a random word from the lists above that the player has to work towards during the game. 
 def getRandomWord(wordDict):
     # This function returns a random string from the passed dictionary of lists of strings, and the key also.
     # First, randomly select a key from the dictionary:
@@ -79,7 +82,7 @@ correctLetters = ''
 secretWord, secretSet = getRandomWord(words)
 gameIsDone = False
 
-
+##This function is the display that gets shown and updated as the game is played. It includes the missed letters, the hangman picture, as well as a counter for guesses taken. 
 def displayBoard(missedLetters, correctLetters, secretWord, score):
     print(HANGMAN_PICS[len(missedLetters)])
     print()
@@ -88,7 +91,7 @@ def displayBoard(missedLetters, correctLetters, secretWord, score):
     print('Missed letters:', end=' ')
     for letter in missedLetters:
         print(letter, end=' ')
-    ##This is the Guessed letter counter -Asher
+##This is the Guessed letter counter -Asher
     a = len(missedLetters)+len(correctLetters)
     b = len(HANGMAN_PICS)
     c = b-a
@@ -114,7 +117,7 @@ def getGuess(alreadyGuessed):
 
         if guess == secretWord:
             return guess
-
+##This contingency code blocks any repeat letters, anything that's not a letter, as well as anything more than 1 letter at a time that isn't the correct word. 
         if guess in alreadyGuessed:
             print('You have already guessed that letter. Choose again.')
         elif len(guess) > 1 and guess != secretWord:
