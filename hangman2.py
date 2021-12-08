@@ -68,10 +68,10 @@ score = 0
 ##This is the function to retrieve a random word from the lists above that the player has to work towards during the game. 
 def getRandomWord(wordDict):
     # This function returns a random string from the passed dictionary of lists of strings, and the key also.
-    # First, randomly select a key from the dictionary:
+    # First, randomly select a key from the dictionary: - Asher
     wordKey = random.choice(list(wordDict.keys()))
 
-    # Second, randomly select a word from the key's list in the dictionary:
+    # Second, randomly select a word from the key's list in the dictionary: -Asher
     wordIndex = random.randint(0, len(wordDict[wordKey]) - 1)
 
     return [wordDict[wordKey][wordIndex], wordKey]
@@ -96,7 +96,7 @@ def displayBoard(missedLetters, correctLetters, secretWord, score):
     print()
 
     blanks = '_' * len(secretWord)
-
+##This block of code ensures that when letter is guessed correctly it corresponds to the correct blank space
     for i in range(len(secretWord)): # replace blanks with correctly guessed letters
         if secretWord[i] in correctLetters:
             blanks = blanks[:i] + secretWord[i] + blanks[i+1:]
@@ -106,7 +106,7 @@ def displayBoard(missedLetters, correctLetters, secretWord, score):
     print()
 
 def getGuess(alreadyGuessed):
-    # Returns the letter the player entered. This function makes sure the player entered a single letter, and not something else.
+    # Returns the letter the player entered. This function makes sure the player entered a single letter, and not something else - Noah
     while True:
         print('Guess a letter.')
         guess = input()
@@ -114,7 +114,7 @@ def getGuess(alreadyGuessed):
 
         if guess == secretWord:
             return guess
-##This contingency code blocks any repeat letters, anything that's not a letter, as well as anything more than 1 letter at a time that isn't the correct word. 
+##This contingency code blocks any repeat letters, anything that's not a letter, as well as anything more than 1 letter at a time that isn't the correct word - Noah
         if guess in alreadyGuessed:
             print('You have already guessed that letter. Choose again.')
         elif len(guess) > 1 and guess != secretWord:
@@ -130,7 +130,7 @@ def playAgain():
     return input().lower().startswith('y')
 
 print('H A N G M A N')
-
+## alters difficulty by removing intermediate hangman string steps as modes get harder. This means less chances to guess incorrectly. - Nathan
 difficulty = 'X'
 while difficulty not in 'EMHP':
   print('Enter difficulty: E - Easy, M - Medium, H - Hard, P - Pendar ')
@@ -152,17 +152,17 @@ if difficulty == 'P':
     del HANGMAN_PICS[3]
     del HANGMAN_PICS[2]
     del HANGMAN_PICS[1]
-
+## defined variables to create strings that missed and correct letters will accumulate in. gameIsDone allows us to start and play the game. -Nathan
 missedLetters = ''
 correctLetters = ''
 secretWord, secretSet = getRandomWord(words)
 gameIsDone = False
-
+## this code block refers to the hint given at the beginning of the game, giving information about the mystery letter.  - Gavin
 while True:
     print('The secret word is in the set: ' + secretSet)
     displayBoard(missedLetters, correctLetters, secretWord, score)
 
-    # Let the player type in a letter.
+    # Let the player type in a letter. - Nathan
     guess = getGuess(missedLetters + correctLetters)
 
     if guess == secretWord:  # this allows the player to guess the word in its entirety and not just letter by letter - Noah
@@ -179,11 +179,11 @@ while True:
         # Prints the current score of the player after the game - Gavin
         print('Your score is:' + ' ' + str(score) + '')
         gameIsDone = True
-
+##Checks if guess is correct, and if so, adds to correctLetters variable - Asher
     elif guess in secretWord:
         correctLetters = correctLetters + guess
 
-        # Check if the player has won
+        # Check if the player has won - Asher
         foundAllLetters = True
         for i in range(len(secretWord)):
             if secretWord[i] not in correctLetters:
@@ -211,16 +211,16 @@ while True:
     else:
         missedLetters = missedLetters + guess
 
-        # Check if player has guessed too many times and lost.
+        # Check if player has guessed too many times and lost. - Nathan
         #Score does not update if the player loses - Gavin
         if len(missedLetters) == len(HANGMAN_PICS) - 1:
             displayBoard(missedLetters, correctLetters, secretWord, score)
             print('You have run out of guesses!\nAfter ' + str(len(missedLetters)) + ' missed guesses and ' + str(len(correctLetters)) + ' correct guesses, the word was "' + secretWord + '"')
             print('Your final score was :' + str(score))
-            # Prints the final score of the player
+            # Prints the final score of the player - Nathan
             score = 0   #resets the score to 0 after a lose
             gameIsDone = True
-    # Ask the player if they want to play again (but only if the game is done).
+    # Ask the player if they want to play again (but only if the game is done). - Noah
     if gameIsDone:
         if playAgain():
             missedLetters = ''
