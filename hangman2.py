@@ -77,10 +77,7 @@ def getRandomWord(wordDict):
     return [wordDict[wordKey][wordIndex], wordKey]
 
 
-missedLetters = ''
-correctLetters = ''
-secretWord, secretSet = getRandomWord(words)
-gameIsDone = False
+
 
 ##This function is the display that gets shown and updated as the game is played. It includes the missed letters, the hangman picture, as well as a counter for guesses taken. 
 def displayBoard(missedLetters, correctLetters, secretWord, score):
@@ -168,17 +165,17 @@ while True:
     # Let the player type in a letter.
     guess = getGuess(missedLetters + correctLetters)
 
-    if guess == secretWord:  # this allows the player to guess the word in its entirity and not just letter by letter - Noah
+    if guess == secretWord:  # this allows the player to guess the word in its entirety and not just letter by letter - Noah
         print('You have guessed the correct word!!!')
         # Increases the score by a different amount based on the difficulty of the game - Gavin
         if difficulty == 'E':
-            score += 1
+            score += 2
         elif difficulty == 'M':
-            score += 3
-        elif difficulty == 'H':
             score += 5
-        elif difficulty == 'P':
+        elif difficulty == 'H':
             score += 10
+        elif difficulty == 'P':
+            score += 20
         # Prints the current score of the player after the game - Gavin
         print('Your score is:' + ' ' + str(score) + '')
         gameIsDone = True
@@ -235,5 +232,10 @@ while True:
             secretWord, secretSet = getRandomWord(words)
         else:
             break
-##asher is very cute
-#I added the sports and first tewenty elements categories and changed some of the outputs - Noah
+
+if __name__ == "__main__":
+    import random
+    gameIsDone = False
+    playAgain()  
+
+    #Asher is very cute 
